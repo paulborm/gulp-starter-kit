@@ -1,0 +1,22 @@
+{% extends "_partials/base.html" %}
+{% set title = "custom title" %}
+
+
+{% block content %}
+
+{% include "_partials/navbar.html" %}
+{% include "_partials/panel.html" %}
+
+<div class="gallery">
+  <!-- Loops through "images" array -->
+  {% for test in tests %}
+  <div class="gallery__item">
+    <h3>{{test.heading}}</h3>
+    <p>{{test.text}}</p> 
+  </div>
+  {% endfor %}
+</div>
+
+<h1>Hello world!!</h1>
+ 
+{% endblock %}   

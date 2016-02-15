@@ -1,0 +1,18 @@
+// panel
+$default-panel-width: 450px;
+$default-panel-height: 600px;
+$default-panel-space-x: 30px;
+$default-panel-space-y: 30px;
+$default-panel-background-color: lightgrey;
+$default-panel-header-height: ($default-panel-height / 3) * 2; 
+$default-panel-header-font-size: 32px;
+$default-panel-header-line-height: 25px;
+$default-panel-header-font-color: white;
+$default-panel-title-shadow-color: rgba(0,0,0,0.75);
+
+// navbar
+$default-navbar-background: black; 
+$default-navbar-font-color: white;
+$default-navbar-font-size: 16px;
+$default-navbar-height: 70px; 
+$default-navbar-gutter: 70px;

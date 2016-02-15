@@ -1,0 +1,68 @@
+.panel{
+	position: relative; 
+	float: left;
+	max-width: $default-panel-width;
+	background-color: $default-panel-background-color;
+	min-height: $default-panel-height;
+	transition: background-color 0.15s;
+	
+	&:hover img{
+		transform: scale(1.2);
+	}
+	
+	&:hover{
+		background-color: darken($default-panel-background-color, 10%);
+	}
+	
+	&__link{
+		position: absolute; 
+		z-index: 3;
+		top: 0; 
+		right: 0; 
+		bottom: 0; 
+		left: 0; 
+	}
+	
+	&__body{
+		overflow: hidden;
+		padding: $default-panel-space-y $default-panel-space-x;
+	}
+	
+	&__header{
+		position: relative; 
+		overflow: hidden;
+		max-height: $default-panel-header-height;
+		
+		img{
+			width: 100%;
+			vertical-align: middle;
+			transition: all 0.15s ease-in-out;
+		}
+	}	
+	
+	&__title{
+		position: absolute;
+		z-index: 2;
+		bottom: $default-panel-space-y;
+		left: $default-panel-space-x; 
+		margin: 0;
+		font-size: $default-panel-header-font-size;
+		color: $default-panel-header-font-color;
+	}
+	
+	&__title-shadow{
+		position: absolute; 
+		z-index: 1;
+		bottom: 0; 
+		width: 100%; 
+		height: $default-panel-header-height / 2; 
+		background-image: 
+		linear-gradient(
+			to top, $default-panel-title-shadow-color, rgba(0,0,0,0)
+		);
+	}
+	
+	&__content{
+		line-height: $default-panel-header-line-height;
+	}
+}
