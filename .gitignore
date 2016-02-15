@@ -2,8 +2,8 @@
 # Created by https://www.gitignore.io/api/windows,node
 
 ### Gulp starter kit 2 ###
-# Ignore the Output Folder #
-app
+# Ignore the Destination Folder #
+dist
 
 ### Windows ###
 # Windows image file caches
