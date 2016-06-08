@@ -41,6 +41,7 @@ gulp.task('images', function(){
       'src/images/**/*.jpg', 
       'src/images/**/*.jpeg',
       'src/images/**/*.png',
+      'src/images/**/*.gif',
       'src/images/**/*.svg'])
     .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/images/'))
