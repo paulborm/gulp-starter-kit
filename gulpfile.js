@@ -25,6 +25,7 @@ var browserSync     = require('browser-sync').create();
 //  5. Copy (From root)
 //  6. Build
 //  7. Serve
+//  8. Default (Build then Serve)
 
 
 
@@ -190,8 +191,9 @@ gulp.task('build', ['nunjucks', 'styles', 'scripts', 'images', 'copy']);
 /*#####################################################################*/
 
 
-gulp.task('serve', ['nunjucks', 'styles', 'scripts', 'images', 'copy'], function() {
+gulp.task('serve', function() {
   browserSync.init({
+    ghostMode: false,
     server: {
       baseDir: "./dist/"
     }
@@ -203,3 +205,17 @@ gulp.task('serve', ['nunjucks', 'styles', 'scripts', 'images', 'copy'], function
   gulp.watch('src/images/**/*', ['images-watch']);
   gulp.watch(['src/*.ico', 'src/.htaccess'], ['copy-watch']);
 });
+
+
+
+
+
+
+/*#####################################################################*/
+/*#######            8. DEFAULT - BUILD AND SERVE               #######*/
+/*#####################################################################*/ 
+
+
+gulp.task('default', ['build', 'serve']);
+
+
