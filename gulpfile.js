@@ -109,7 +109,7 @@ gulp.task('scripts-normal-watch', ['scripts-normal'], function() {
 
 
 gulp.task('scripts-vendor', function() {
-  return gulp.src(['src/scripts/vendor/vendor/**/*.js'])
+  return gulp.src(['src/scripts/vendor/**/*.js'])
     .pipe(plumber({
       errorHandler: function (error) {
         console.log(error.message);
