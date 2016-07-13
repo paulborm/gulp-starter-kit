@@ -23,9 +23,10 @@ var browserSync     = require('browser-sync').create();
 //  3. Scripts
 //  4. Nunjucks (Templating)
 //  5. Copy (From root)
-//  6. Build
-//  7. Serve
-//  8. Default (Build then Serve)
+//  6. Fonts
+//  7. Build
+//  8. Serve
+//  9. Default (Build then Serve)
 
 
 
@@ -174,8 +175,28 @@ gulp.task('copy-watch', ['copy'], function() {
 
 
 
+
 /*#####################################################################*/
-/*#######              6. BUILD (BUILD WEBSITE)                 #######*/
+/*#######             6. Fonts (Copy Font Files)                #######*/
+/*#####################################################################*/
+
+
+gulp.task('fonts', function() {
+   gulp.src(['src/fonts/**/*'])
+   .pipe(gulp.dest('dist/fonts'))
+});
+
+// WATCH TASK
+gulp.task('fonts-watch', ['copy'], function() {
+  browserSync.reload();
+});
+
+
+
+
+
+/*#####################################################################*/
+/*#######              7. BUILD (BUILD WEBSITE)                 #######*/
 /*#####################################################################*/ 
 
 
@@ -187,7 +208,7 @@ gulp.task('build', ['nunjucks', 'styles', 'scripts', 'images', 'copy']);
 
 
 /*#####################################################################*/
-/*#######             7. SERVE (CREATE SERVER)                  #######*/
+/*#######             8. SERVE (CREATE SERVER)                  #######*/
 /*#####################################################################*/
 
 
@@ -204,6 +225,7 @@ gulp.task('serve', function() {
   gulp.watch('src/scripts/vendor/**/*.js', ['scripts-vendor-watch']);
   gulp.watch('src/images/**/*', ['images-watch']);
   gulp.watch(['src/*.ico', 'src/.htaccess'], ['copy-watch']);
+  gulp.watch(['src/fonts/**/*'], ['fonts-watch']);
 });
 
 
@@ -212,7 +234,7 @@ gulp.task('serve', function() {
 
 
 /*#####################################################################*/
-/*#######            8. DEFAULT - BUILD AND SERVE               #######*/
+/*#######            9. DEFAULT - BUILD AND SERVE               #######*/
 /*#####################################################################*/ 
 
 
