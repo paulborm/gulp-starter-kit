@@ -10,6 +10,9 @@ var cache           = require('gulp-cache');
 var minifycss       = require('gulp-clean-css');
 var sass            = require('gulp-sass');
 var nunjucks        = require('gulp-nunjucks');
+var data            = require('gulp-data');
+var path            = require('path');
+var fs              = require('fs');
 var browserSync     = require('browser-sync').create();
 
 
