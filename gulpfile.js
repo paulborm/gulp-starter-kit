@@ -139,19 +139,32 @@ gulp.task('scripts', ['scripts-normal', 'scripts-vendor']);
 
 gulp.task('nunjucks', function() {
     return gulp.src('src/*.html')
+
+      // Adding data to Nunjucks 
+      .pipe(data(function() {
+        return JSON.parse(fs.readFileSync('./src/data/data.json'));
+      }))
+
+      /*
+      .pipe(data(function() {
+        return JSON.parse(fs.readFileSync('./src/data/other-data-file.json'));
+      }))
+      */
+
       .pipe(nunjucks.compile())
-      //.pipe(htmlPrettify({indent_char: ' ', indent_size: 4}))
       .pipe(gulp.dest('dist'))
-      
-      //.pipe(browserSync.reload({stream:true}))
 });
+
 
 // WATCH TASK
 gulp.task('nunjucks-watch', ['nunjucks'], function() {
   browserSync.reload();
 });    
 
-
+// WATCH TASK
+gulp.task('data-watch', ['nunjucks'], function() {
+  browserSync.reload();
+});    
 
 
 
@@ -220,6 +233,7 @@ gulp.task('serve', function() {
     }
   });
   gulp.watch(['src/*.html', 'src/parts/**/*.html'], ['nunjucks-watch']);
+  gulp.watch('src/data/**/*.json', ['data-watch']);
   gulp.watch('src/styles/**/*.scss', ['styles']);
   gulp.watch('src/scripts/*.js', ['scripts-normal-watch']);
   gulp.watch('src/scripts/vendor/**/*.js', ['scripts-vendor-watch']);
