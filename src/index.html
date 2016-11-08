@@ -5,4 +5,11 @@
 {% block body %}
 <h1>Hello World</h1>
 
+<strong>Example Data:</strong> from <i>./src/data/data.json</i>
+<ul>
+    {% for data in data %}
+    <li>{{data.name}} {{data.last_name}}</li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
