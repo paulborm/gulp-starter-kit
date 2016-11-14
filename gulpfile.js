@@ -145,7 +145,7 @@ Combines globally used scripts
 
 gulp.task('scripts-vendor-global', function(){
   return gulp.src([
-    //'src/scripts/vendor/jquery-1.12.0.min.js'
+      'src/scripts/vendor/jquery-1.12.0.min.js'
     ])
     .pipe(plumber({
       errorHandler: function (error) {
