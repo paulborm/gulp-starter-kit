@@ -21,11 +21,13 @@
 {% endif %}
     
     {% block body %}{% endblock %}
-    
-    <!--
-    <script src="scripts/vendor/jquery-1.12.0.min.js"></script>
-    <script src="scripts/vendor/uikit.min.js"></script>
-    -->
+
+        
+    <script src="scripts/vendor/vendor-global.min.js"></script>
+       
+    {# Page specific scripts #}
+    {% block scripts %}{% endblock %}
+        
     <script src="scripts/main.min.js"></script>
 </body>
 
