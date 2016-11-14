@@ -135,6 +135,36 @@ gulp.task('scripts', ['scripts-normal', 'scripts-vendor']);
 
 
 
+
+/*#####################################################################*/
+/*#######              3.1 SCRIPTS Global Plugins               #######*/
+/*#####################################################################*/
+/*
+Combines globally used scripts
+*/
+
+gulp.task('scripts-vendor-global', function(){
+  return gulp.src([
+    //'src/scripts/vendor/jquery-1.12.0.min.js'
+    ])
+    .pipe(plumber({
+      errorHandler: function (error) {
+        console.log(error.message);
+        this.emit('end');
+    }}))
+    .pipe(concat('vendor-global.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/scripts/vendor'))
+});
+
+
+
+
+
+
+
+
+
 /*#####################################################################*/
 /*#######           4. NUNJUCKS (HTML, TEMPLATES)               #######*/
 /*#####################################################################*/
