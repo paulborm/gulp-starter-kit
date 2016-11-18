@@ -15,6 +15,8 @@ var path            = require('path');
 var fs              = require('fs');
 var browserSync     = require('browser-sync').create();
 
+var critical = require('critical');
+
 
 
 /*#####################################################################*/
