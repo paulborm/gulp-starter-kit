@@ -285,8 +285,10 @@ gulp.task('critical', ['build'], function() {
 gulp.task('serve', function() {
   browserSync.init({
     ghostMode: false,
-    server: {
-      baseDir: "./dist/"
+    proxy: "localhost",
+    serveStatic: ["./dist"],
+    serveStaticOptions: {
+      extensions: ["html"]
     }
   });
   gulp.watch(['src/*.html', 'src/parts/**/*.html'], ['nunjucks-watch']);
