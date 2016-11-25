@@ -285,6 +285,7 @@ gulp.task('critical', ['build'], function() {
 gulp.task('serve', function() {
   browserSync.init({
     ghostMode: false,
+    port: "3000",
     proxy: "localhost",
     serveStatic: ["./dist"],
     serveStaticOptions: {
