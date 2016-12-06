@@ -32,5 +32,3 @@
     - "gulp" startet den Server und kompiliert alle Dateien in den "dist" Ordner
     - im dist Ordner befindet sich am Schluss die fertige Website
     -> weitere Befehle/Gulp-Tasks stehen in "gulpfile.js"
-    -> Beim ändern von Inhalten oder Mandanteninfos wird "gulp nunjucks" meistens reichen
-
