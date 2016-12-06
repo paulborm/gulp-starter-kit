@@ -10,3 +10,27 @@
 . Data File Support
 . Uikit
 
+
+
+## Entwicklung findet im ./src Verzeichnis statt
+# ./dist Verzeichnis beinhaltet fertige Website
+
+
+# Benötigte Tools
+    - node.js
+    - Gulp
+    - Git
+    (Müssen Lokal installiert werden)
+
+
+# Installieren der Entwicklungs Abhängigkeiten
+    - Website Ordner mit Kommandozeile öffnen
+    - "npm install" installiert alle Abhängigkeiten (gelistet in package.json)
+
+
+# Starten der Entwicklungsumgebung über die Kommandozeile
+    - "gulp" startet den Server und kompiliert alle Dateien in den "dist" Ordner
+    - im dist Ordner befindet sich am Schluss die fertige Website
+    -> weitere Befehle/Gulp-Tasks stehen in "gulpfile.js"
+    -> Beim ändern von Inhalten oder Mandanteninfos wird "gulp nunjucks" meistens reichen
+
