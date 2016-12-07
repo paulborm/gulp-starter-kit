@@ -259,13 +259,18 @@ gulp.task('build', ['nunjucks', 'styles', 'scripts', 'images', 'copy']);
 /*#####################################################################*/ 
 
 
-gulp.task('critical', ['build'], function() {
+gulp.task('critical', function() {
     critical.generate({
+        // inline critical-css in html
         inline: true,
+        // base directory - source and destination
         base: 'dist/',
+        // file which will be executed
         src: 'index.html',
-        dest: 'dist/index.html',
+        // where to output
+        dest: 'index.html',
         minify: true,
+        // optimize for this viewport
         width: 414,
         height: 736
     });
