@@ -1,5 +1,6 @@
 {# global site title #}
 {% set siteTitle = "Gulp Starter Kit" %}
+{% set siteBaseURL = "http://" %}
 
 <!DOCTYPE html>
 <html lang="de-DE">
@@ -8,6 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ siteBaseURL }}{{ canonicalUrl }}">
     <title>{{ siteTitle + " - " + title | default(siteTitle) }}</title>
     <meta name="description" content="">
     <link rel="stylesheet" href="styles/main.min.css">
