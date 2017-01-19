@@ -6,22 +6,25 @@
   "author": "Paul Borm",
   "license": "",
   "devDependencies": {
+    "autoprefixer": "^6.6.1",
     "browser-sync": "^2.17.5",
     "critical": "^0.8.1",
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
     "gulp-cache": "^0.4.5",
-    "gulp-clean-css": "^2.0.13",
     "gulp-concat": "^2.6.0",
     "gulp-data": "^1.2.1",
     "gulp-html-prettify": "^0.0.1",
     "gulp-imagemin": "^3.1.1",
     "gulp-nunjucks": "^2.3.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.3.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "postcss-clean": "^1.0.2",
+    "postcss-cssnext": "^2.9.0",
+    "postcss-discard-comments": "^2.0.4",
+    "postcss-import": "^9.1.0"
   }
 }

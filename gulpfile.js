@@ -1,22 +1,27 @@
 var gulp            = require('gulp');
-var plumber         = require('gulp-plumber');
 var rename          = require('gulp-rename');
-var autoprefixer    = require('gulp-autoprefixer');
 var concat          = require('gulp-concat');
 var uglify          = require('gulp-uglify');
 var htmlPrettify    = require('gulp-html-prettify');
 var imagemin        = require('gulp-imagemin');
 var cache           = require('gulp-cache');
-var minifycss       = require('gulp-clean-css');
-var sass            = require('gulp-sass');
 var nunjucks        = require('gulp-nunjucks');
 var data            = require('gulp-data');
 var path            = require('path');
 var fs              = require('fs');
+var critical        = require('critical');
 var browserSync     = require('browser-sync').create();
 
-var critical = require('critical');
+// postCSS shit
+var postcss                   = require('gulp-postcss');
+var postcss_cssnext           = require('postcss-cssnext');
+var postcss_import            = require('postcss-import');
+var postcss_clean             = require('postcss-clean');
+var postcss_discardComments   = require('postcss-discard-comments');
 
+
+var folderSrc       = "./src";
+var folderDest      = "./dist";
 
 
 /*#####################################################################*/
@@ -65,25 +70,64 @@ gulp.task('images-watch', ['images'], function() {
 
 
 /*#####################################################################*/
-/*#######                  2. STYLES (SASS)                     #######*/
+/*#######                      2. STYLES                         #######*/
 /*#####################################################################*/
 
 
 gulp.task('styles', function(){
-  gulp.src(['src/styles/**/*.scss'])
-    .pipe(plumber({
-      errorHandler: function (error) {
-        console.log(error.message);
-        this.emit('end');
-    }}))
-    .pipe(sass())
-    .pipe(autoprefixer('last 5 versions'))
-    .pipe(gulp.dest('dist/styles/'))
+  gulp.src(['src/styles/main.css'])
+
+    .pipe(postcss([
+      postcss_import(),
+      postcss_cssnext(),
+      postcss_discardComments()
+    ]))
+    .pipe(gulp.dest(folderDest + '/styles/'))
+
+
     .pipe(rename({suffix: '.min'}))
-    .pipe(minifycss())
-    .pipe(gulp.dest('dist/styles/'))
+    .pipe(postcss([
+      postcss_clean()
+    ]))
+    .pipe(gulp.dest(folderDest + '/styles/'))
+
+
     .pipe(browserSync.stream());
+
 });
+
+
+
+
+
+
+
+
+
+/*#####################################################################*/
+/*#######                    Critical CSS                      #######*/
+/*#####################################################################*/ 
+
+
+gulp.task('critical', function() {
+    critical.generate({
+        // inline critical-css in html
+        inline: true,
+        // base directory - source and destination
+        base: 'dist/',
+        // file which will be executed
+        src: 'index.html',
+        // where to output
+        dest: 'index.html',
+        minify: true,
+        // optimize for this viewport
+        width: 414,
+        height: 736
+    });
+});
+
+
+
 
 
 
@@ -224,21 +268,6 @@ gulp.task('copy-watch', ['copy'], function() {
 
 
 
-/*#####################################################################*/
-/*#######             6. Fonts (Copy Font Files)                #######*/
-/*#####################################################################*/
-
-
-gulp.task('fonts', function() {
-   gulp.src(['src/fonts/**/*'])
-   .pipe(gulp.dest('dist/fonts'))
-});
-
-// WATCH TASK
-gulp.task('fonts-watch', ['copy'], function() {
-  browserSync.reload();
-});
-
 
 
 
@@ -250,31 +279,6 @@ gulp.task('fonts-watch', ['copy'], function() {
 
 gulp.task('build', ['nunjucks', 'styles', 'scripts', 'images', 'copy']);
 
-
-
-
-
-/*#####################################################################*/
-/*#######                    Critical CSS                      #######*/
-/*#####################################################################*/ 
-
-
-gulp.task('critical', function() {
-    critical.generate({
-        // inline critical-css in html
-        inline: true,
-        // base directory - source and destination
-        base: 'dist/',
-        // file which will be executed
-        src: 'index.html',
-        // where to output
-        dest: 'index.html',
-        minify: true,
-        // optimize for this viewport
-        width: 414,
-        height: 736
-    });
-});
 
 
 
@@ -292,19 +296,18 @@ gulp.task('serve', function() {
     ghostMode: false,
     port: "3000",
     proxy: "localhost",
-    serveStatic: ["./dist"],
+    serveStatic: [folderDest],
     serveStaticOptions: {
       extensions: ["html"]
     }
   });
   gulp.watch(['src/*.html', 'src/parts/**/*.html'], ['nunjucks-watch']);
   gulp.watch('src/data/**/*.json', ['data-watch']);
-  gulp.watch('src/styles/**/*.scss', ['styles']);
+  gulp.watch(folderSrc + '/styles/**/*.css', ['styles']);
   gulp.watch('src/scripts/*.js', ['scripts-normal-watch']);
   gulp.watch('src/scripts/vendor/**/*.js', ['scripts-vendor-watch']);
   gulp.watch('src/images/**/*', ['images-watch']);
   gulp.watch(['src/*.ico', 'src/.htaccess'], ['copy-watch']);
-  gulp.watch(['src/fonts/**/*'], ['fonts-watch']);
 });
 
 
