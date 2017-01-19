@@ -14,10 +14,12 @@ var browserSync     = require('browser-sync').create();
 
 // postCSS shit
 var postcss                   = require('gulp-postcss');
-var postcss_cssnext           = require('postcss-cssnext');
+//var postcss_cssnext           = require('postcss-cssnext');
 var postcss_import            = require('postcss-import');
 var postcss_clean             = require('postcss-clean');
 var postcss_discardComments   = require('postcss-discard-comments');
+var postcss_customProperties  = require('postcss-custom-properties');
+var autoprefixer              = require('autoprefixer');
 
 
 var folderSrc       = "./src";
@@ -79,8 +81,9 @@ gulp.task('styles', function(){
 
     .pipe(postcss([
       postcss_import(),
-      postcss_cssnext(),
-      postcss_discardComments()
+      postcss_customProperties(),
+      postcss_discardComments(),
+      autoprefixer("last 3 versions")
     ]))
     .pipe(gulp.dest(folderDest + '/styles/'))
 
@@ -93,6 +96,7 @@ gulp.task('styles', function(){
 
 
     .pipe(browserSync.stream());
+
 
 });
 
