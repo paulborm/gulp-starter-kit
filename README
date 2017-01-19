@@ -4,7 +4,7 @@
 ## Features
 . Gulp
 . Nunjucks Templating
-. SCSS + Autoprefixer
+. postCSS
 . Live-Reload
 . Image Optimize
 . Data File Support
