@@ -75,7 +75,7 @@ gulp.task('images-watch', ['images'], function() {
 
 
 gulp.task('styles', function(){
-  gulp.src(['src/styles/main.css'])
+  gulp.src([folderSrc + '/styles/main.css'])
 
     .pipe(postcss([
       postcss_import(),
@@ -114,7 +114,7 @@ gulp.task('critical', function() {
         // inline critical-css in html
         inline: true,
         // base directory - source and destination
-        base: 'dist/',
+        base: folderDest,
         // file which will be executed
         src: 'index.html',
         // where to output
