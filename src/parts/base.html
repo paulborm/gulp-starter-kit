@@ -1,6 +1,7 @@
-{# global site title #}
+{% set pageActive = pageActive -%}
 {% set siteTitle = "Gulp Starter Kit" %}
-{% set siteBaseURL = "http://" %}
+{% set siteDescription = "The best Gulp Starter Kit you can find." %}
+{% set siteBaseURL = "https://" %}
 
 <!DOCTYPE html>
 <html lang="de-DE">
@@ -8,18 +9,20 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="canonical" href="{{ siteBaseURL }}{{ canonicalUrl }}">
 
         <title>
-            {% if pageTitle %}
-                {{ siteTitle + " - " + pageTitle }}
+            {% if title %} 
+                {{ siteTitle + " - " + title }}
             {% else %}
                 {{ siteTitle }}
             {% endif %}
         </title>
 
-        <meta name="description" content="">
+        <meta name="description" content="{{ siteDescription }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="canonical" href="{{ siteBaseURL }}{{ canonicalUrl }}">
+
+
         <link rel="stylesheet" href="styles/main.min.css">
     </head>
 
