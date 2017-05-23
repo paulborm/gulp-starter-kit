@@ -210,8 +210,15 @@ gulp.task('data-watch', ['nunjucks'], function() {
 
 
 gulp.task('copy', function() {
-   gulp.src(['src/*.ico', 'src/.htaccess'])
-   .pipe(gulp.dest('dist'))
+   gulp.src([
+     folderSrc + '/.htaccess', 
+     folderSrc + '/*.ico', 
+     folderSrc + '/*.js', 
+     folderSrc + '/*.json', 
+     folderSrc + '/*.xml',
+     folderSrc + '/*.txt'
+     ])
+   .pipe(gulp.dest(folderDest))
 });
 
 // WATCH TASK
@@ -304,7 +311,7 @@ gulp.task('serve', function() {
   gulp.watch('src/scripts/vendor/**/*.js', ['scripts-vendor-watch']);
   gulp.watch('src/images/**/*', ['images-watch']);
   gulp.watch(['src/*.ico', 'src/.htaccess'], ['copy-watch']);
-  gulp.watch(['src/fonts/**/*'], ['fonts-watch']);
+    gulp.watch([folderSrc + '/.htaccess', folderSrc + '/*.ico', folderSrc + '/*.js', folderSrc + '/*.json', folderSrc + '/*.xml', folderSrc + '/*.txt'], ['copy-watch']);
 });
 
 
