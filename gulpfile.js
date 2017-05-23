@@ -211,12 +211,12 @@ gulp.task('data-watch', ['nunjucks'], function() {
 
 gulp.task('copy', function() {
    gulp.src([
-     folderSrc + '/.htaccess', 
-     folderSrc + '/*.ico', 
-     folderSrc + '/*.js', 
-     folderSrc + '/*.json', 
-     folderSrc + '/*.xml',
-     folderSrc + '/*.txt'
+     './src' + '/.htaccess', 
+     './src' + '/*.ico', 
+     './src' + '/*.js', 
+     './src' + '/*.json', 
+     './src' + '/*.xml',
+     './src' + '/*.txt'
      ])
    .pipe(gulp.dest(folderDest))
 });
@@ -311,7 +311,7 @@ gulp.task('serve', function() {
   gulp.watch('src/scripts/vendor/**/*.js', ['scripts-vendor-watch']);
   gulp.watch('src/images/**/*', ['images-watch']);
   gulp.watch(['src/*.ico', 'src/.htaccess'], ['copy-watch']);
-    gulp.watch([folderSrc + '/.htaccess', folderSrc + '/*.ico', folderSrc + '/*.js', folderSrc + '/*.json', folderSrc + '/*.xml', folderSrc + '/*.txt'], ['copy-watch']);
+    gulp.watch(['./src' + '/.htaccess', './src' + '/*.ico', './src' + '/*.js', './src' + '/*.json', './src' + '/*.xml', './src' + '/*.txt'], ['copy-watch']);
 });
 
 
