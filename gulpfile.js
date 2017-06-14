@@ -218,7 +218,7 @@ gulp.task('copy', function() {
      './src' + '/*.xml',
      './src' + '/*.txt'
      ])
-   .pipe(gulp.dest('./dist))
+   .pipe(gulp.dest('./dist)')
 });
 
 // WATCH TASK
