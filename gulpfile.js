@@ -2,7 +2,7 @@ var gulp            = require('gulp');
 var plumber         = require('gulp-plumber');
 var rename          = require('gulp-rename');
 var autoprefixer    = require('gulp-autoprefixer');
-var concat          = require('gulp-concat');
+var concat          = require('gulp-concat-util');
 var uglify          = require('gulp-uglify');
 var htmlPrettify    = require('gulp-html-prettify');
 var imagemin        = require('gulp-imagemin');
@@ -14,9 +14,6 @@ var data            = require('gulp-data');
 var path            = require('path');
 var fs              = require('fs');
 var browserSync     = require('browser-sync').create();
-
-var critical = require('critical');
-
 
 
 /*#####################################################################*/
@@ -86,6 +83,27 @@ gulp.task('styles', function(){
 });
 
 
+gulp.task('criticalCSS', function() {
+  return gulp.src('src/styles/critical.scss')
+    .pipe(sass())
+    .pipe(autoprefixer('last 5 versions'))
+    .pipe(minifycss())
+    .pipe(rename({suffix: '.min'}))
+    
+    .pipe(concat.header('<style type="text/css">'))
+    .pipe(concat.footer('</style>'))
+    .pipe(rename({
+        basename: 'criticalCSS',
+        extname: '.html'
+      }))
+      
+    .pipe(gulp.dest('src/parts/'))
+});
+
+// WATCH TASK
+gulp.task('criticalCSS-watch', ['criticalCSS'], function() {
+  browserSync.reload();
+});   
 
 
 
@@ -218,7 +236,7 @@ gulp.task('copy', function() {
      './src' + '/*.xml',
      './src' + '/*.txt'
      ])
-   .pipe(gulp.dest('./dist)')
+   .pipe(gulp.dest('./dist'))
 });
 
 // WATCH TASK
@@ -255,34 +273,7 @@ gulp.task('fonts-watch', ['copy'], function() {
 /*#####################################################################*/ 
 
 
-gulp.task('build', ['nunjucks', 'styles', 'scripts', 'images', 'copy']);
-
-
-
-
-
-/*#####################################################################*/
-/*#######                    Critical CSS                      #######*/
-/*#####################################################################*/ 
-
-
-gulp.task('critical', function() {
-    critical.generate({
-        // inline critical-css in html
-        inline: true,
-        // base directory - source and destination
-        base: 'dist/',
-        // file which will be executed
-        src: 'index.html',
-        // where to output
-        dest: 'index.html',
-        minify: true,
-        // optimize for this viewport
-        width: 414,
-        height: 736
-    });
-});
-
+gulp.task('build', ['styles', 'criticalCSS', 'nunjucks', 'scripts', 'images', 'copy']);
 
 
 
@@ -306,12 +297,13 @@ gulp.task('serve', function() {
   });
   gulp.watch(['src/*.html', 'src/parts/**/*.html'], ['nunjucks-watch']);
   gulp.watch('src/data/**/*.json', ['data-watch']);
-  gulp.watch('src/styles/**/*.scss', ['styles']);
+  //gulp.watch('src/styles/critical.scss', ['criticalCSS']);
+  gulp.watch('src/styles/**/*.scss', ['styles', 'criticalCSS']);
   gulp.watch('src/scripts/*.js', ['scripts-normal-watch']);
   gulp.watch('src/scripts/vendor/**/*.js', ['scripts-vendor-watch']);
   gulp.watch('src/images/**/*', ['images-watch']);
   gulp.watch(['src/*.ico', 'src/.htaccess'], ['copy-watch']);
-    gulp.watch(['./src' + '/.htaccess', './src' + '/*.ico', './src' + '/*.js', './src' + '/*.json', './src' + '/*.xml', './src' + '/*.txt'], ['copy-watch']);
+  gulp.watch(['./src' + '/.htaccess', './src' + '/*.ico', './src' + '/*.js', './src' + '/*.json', './src' + '/*.xml', './src' + '/*.txt'], ['copy-watch']);
 });
 
 

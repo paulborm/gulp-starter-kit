@@ -11,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <title>
-            {% if pageTitle %} 
+            {% if pageTitle %}  
                 {{ siteTitle + " - " + pageTitle }}
             {% else %}
                 {{ siteTitle }}
@@ -22,7 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="canonical" href="{{ siteBaseURL }}{{ canonicalUrl }}">
 
-
+        {% include "parts/criticalCSS.html" %}
         <link rel="stylesheet" href="styles/main.min.css?v=1.0.0">
     </head>
 
