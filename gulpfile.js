@@ -4,7 +4,6 @@ var rename          = require('gulp-rename');
 var autoprefixer    = require('gulp-autoprefixer');
 var concat          = require('gulp-concat-util');
 var uglify          = require('gulp-uglify');
-var htmlPrettify    = require('gulp-html-prettify');
 var imagemin        = require('gulp-imagemin');
 var cache           = require('gulp-cache');
 var minifycss       = require('gulp-clean-css');
