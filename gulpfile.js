@@ -4,6 +4,7 @@ var rename          = require('gulp-rename');
 var autoprefixer    = require('gulp-autoprefixer');
 var concat          = require('gulp-concat-util');
 var uglify          = require('gulp-uglify');
+var babel           = require('gulp-babel');
 var imagemin        = require('gulp-imagemin');
 var cache           = require('gulp-cache');
 var minifycss       = require('gulp-clean-css');
@@ -111,7 +112,7 @@ gulp.task('criticalCSS-watch', ['criticalCSS'], function() {
 /*#######                     3. SCRIPTS                        #######*/
 /*#####################################################################*/
 
-
+/*
 gulp.task('scripts-normal', function(){
   return gulp.src(['src/scripts/*.js'])
     .pipe(plumber({
@@ -123,6 +124,24 @@ gulp.task('scripts-normal', function(){
     .pipe(uglify())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('dist/scripts/'))
+});
+*/
+
+gulp.task('scripts', function(){
+  return gulp.src([
+    //'src/scripts/someFile.js','
+  ])
+    .pipe(babel({
+      "presets": ["env"]
+    }))
+    .pipe(plumber({
+      errorHandler: function (error) {
+        console.log(error.message);
+        this.emit('end');
+    }}))
+    .pipe(uglify())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('assets/js/'))
 });
 
 // WATCH TASK
