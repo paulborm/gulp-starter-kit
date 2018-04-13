@@ -73,7 +73,7 @@ gulp.task('styles', function(){
         console.log(error.message);
         this.emit('end');
     }}))
-    .pipe(sass())
+    .pipe(sass( sass().on('error', sass.logError) ))
     .pipe(autoprefixer('last 5 versions'))
     .pipe(gulp.dest('dist/styles/'))
     .pipe(rename({suffix: '.min'}))
@@ -85,7 +85,7 @@ gulp.task('styles', function(){
 
 gulp.task('criticalCSS', function() {
   return gulp.src('src/styles/critical.scss')
-    .pipe(sass())
+    .pipe(sass( sass().on('error', sass.logError) ))
     .pipe(autoprefixer('last 5 versions'))
     .pipe(minifycss())
     .pipe(rename({suffix: '.min'}))
